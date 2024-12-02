@@ -25,7 +25,7 @@ export default function NavSide() {
                                 const match = useMatch(link.path)
                                 return (
                                     <Link to={link.path} key={link.path} className={`
-                                        flex gap-2 mb-[30px] cursor-pointer px-3 py-3  ${match && "bg-whiteChristmas-100 rounded-xl w-full shadow-md"}
+                                        flex gap-2 mb-[25px] cursor-pointer px-3 py-3  ${match && "bg-whiteChristmas-100 rounded-xl w-full shadow-md"}
                                     `}>
                                         <img src={graph} alt="icon_graph" />
                                         {link.label}

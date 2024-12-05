@@ -14,7 +14,8 @@ export default {
           100: "#fff",
           200: "#f2f3f3",
           300: "#F4F7FE",
-          400: "#A3AED0"
+          400: "#A3AED0",
+          500: "#FAFAFA"
         },
         darkChristmas: {
           100: "#565656",

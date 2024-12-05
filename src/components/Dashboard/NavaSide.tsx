@@ -56,33 +56,3 @@ export default function NavSide() {
         </nav>
     );
 }
-=======
-  return (
-    <nav className="p-[40px] bg-blueChristmas-100 max-w-[306px] w-full h-[100dvh] font-poppins font-semibold">
-      <div>
-        <div className="flex items-center gap-2 text-[26px] mb-[50px]">
-          <img src={icon_dashboard} alt="icon_dashboard" />
-          <h1>Dashboard</h1>
-        </div>
-        <div>
-          <ul>
-            {links.map((link: any) => {
-              const match = useMatch(link.path);
-              return (
-                <Link
-                  to={link.path}
-                  key={link.path}
-                  className={`flex gap-2 mb-[25px] cursor-pointer px-3 py-3  ${match && "bg-whiteChristmas-100 rounded-xl w-full shadow-md"}`}
-                >
-                  <img src={graph} alt="icon_graph" />
-                  {link.label}
-                </Link>
-              );
-            })}
-          </ul>
-        </div>
-      </div>
-    </nav>
-  );
-}
->>>>>>> d063d34df622575d791d73f063871d600b8bc089

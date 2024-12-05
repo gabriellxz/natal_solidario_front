@@ -28,14 +28,15 @@ export default function RoutesMain() {
                         path="arrecadadores"
                         element={<Collectors />}
                     />
-                    <Route 
-                        path="/dashboard-collectors"
-                    >
-                        <Route 
-                            index 
-                            path="new-donation" element={<NewDonation />} 
-                        />
-                    </Route>
+                </Route>
+                
+                <Route
+                    path="/dashboard-collectors"
+                >
+                    <Route
+                        index
+                        path="new-donation" element={<NewDonation />}
+                    />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -47,9 +47,6 @@ export default function TableCollectors() {
                     </CardContent>
                 </Card>
             </div>
-            <div>
-                
-            </div>
         </main>
     )
 }

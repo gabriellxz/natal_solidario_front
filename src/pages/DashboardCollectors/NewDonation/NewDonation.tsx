@@ -73,7 +73,6 @@ export function NewDonation() {
                         id={option.id}
                         onChange={() => handleCheckboxChange(option.id)}
                         checked={selected.includes(option.id)}
-                        required
                       />
                       <span>{option.label}</span>
                     </InputLabel>

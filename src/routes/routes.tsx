@@ -4,6 +4,7 @@ import Login from "../pages/Login/login";
 import Collectors from "../pages/Dashboard/Collectors/Collectors";
 import TableCollectors from "../pages/Dashboard/TableCollectors/TableCollectors";
 import { NewDonation } from "../pages/DashboardCollectors/NewDonation/NewDonation";
+import DonationPage from "../pages/DashboardCollectors/NewDonation/DonorForms"
 
 export default function RoutesMain() {
     return (
@@ -38,6 +39,10 @@ export default function RoutesMain() {
                         path="new-donation" element={<NewDonation />}
                     />
                 </Route>
+
+                <Route 
+                path="/doacao" element={<DonationPage />} 
+                />
             </Routes>
         </BrowserRouter>
     );

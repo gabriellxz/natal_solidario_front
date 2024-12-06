@@ -71,10 +71,16 @@ export default function TableTargets() {
         <table className="min-w-full">
           <thead className="">
             <tr className="border-b border-gray-300 w-full">
-              <th className="text-left py-3 px-6 pl-[46px] font-medium">Nome</th>
-              <th className="text-left py-3 px-6 font-medium">N° de Doadores</th>
+              <th className="text-left py-3 px-6 pl-[46px] font-medium">
+                Nome
+              </th>
+              <th className="text-left py-3 px-6 font-medium">
+                N° de Doadores
+              </th>
               <th className="text-left py-3 px-6 font-medium">N° de Doações</th>
-              <th className="text-left py-3 px-6 font-medium">N° de Alimentos</th>
+              <th className="text-left py-3 px-6 font-medium">
+                N° de Alimentos
+              </th>
             </tr>
           </thead>
           <tbody>

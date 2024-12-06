@@ -27,7 +27,7 @@ export default function RoutesMain() {
           path="/dashboard-collectors/new-donation"
           element={<NewDonation />}
         />
-        <Route path="/doacao" element={<DonationPage />} />
+        <Route path="/dashboard-collectors/confirm-donation" element={<DonationPage />} />
       </Routes>
     </BrowserRouter>
   );

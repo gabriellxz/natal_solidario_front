@@ -1,4 +1,4 @@
-import icon_profile from "../../assets/icon_profile.svg";
+import icon_profile from "../../../assets/icon_profile.svg";
 
 export default function Header() {
   return (

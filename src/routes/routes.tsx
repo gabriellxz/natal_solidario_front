@@ -5,40 +5,22 @@ import Collectors from "../pages/Dashboard/Collectors/Collectors";
 import TableCollectors from "../pages/Dashboard/TableCollectors/TableCollectors";
 import { NewDonation } from "../pages/DashboardCollectors/NewDonation/NewDonation";
 
+
 export default function RoutesMain() {
-    return (
-        <BrowserRouter>
-            <Routes>
-                {/* ESTA ROTA ESTÁ SENDO RAIZ TEMPORIAMENTE */}
-                <Route
-                    path="/"
-                    element={
-                        <Login />
-                    }
-                />
-                <Route
-                    path="dashboard"
-                    element={<Dashboard />}
-                >
-                    <Route
-                        index
-                        element={<TableCollectors />}
-                    />
-                    <Route
-                        path="arrecadadores"
-                        element={<Collectors />}
-                    />
-                </Route>
-                
-                <Route
-                    path="/dashboard-collectors"
-                >
-                    <Route
-                        index
-                        path="new-donation" element={<NewDonation />}
-                    />
-                </Route>
-            </Routes>
-        </BrowserRouter>
-    );
+  return (
+    <BrowserRouter>
+      <Routes>
+        {/* ESTA ROTA ESTÁ SENDO RAIZ TEMPORIAMENTE */}
+        <Route path="/" element={<Login />} />
+        <Route path="dashboard" element={<Dashboard />}>
+          <Route index element={<TableCollectors />} />
+          <Route path="arrecadadores" element={<Collectors />} />
+        </Route>
+
+        <Route path="/dashboard-collectors">
+          <Route index path="new-donation" element={<NewDonation />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  );
 }

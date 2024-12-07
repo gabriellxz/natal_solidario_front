@@ -5,7 +5,7 @@ import { useState } from "react";
 
 export default function Dashboard() {
 
-  const [title, setTitle] = useState<string>("");
+  const [title, setTitle] = useState<string>("Dashboard");
 
   return (
     <main className="flex w-full">

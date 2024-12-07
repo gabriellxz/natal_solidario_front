@@ -1,4 +1,4 @@
-import { AddCircle } from "@mui/icons-material";
+// import { AddCircle } from "@mui/icons-material";
 import {
   Table,
   TableBody,
@@ -47,7 +47,7 @@ export function RecentCollectionsTable({
           <p className="text-sm">{collections.length} arrecadações feitas</p>
         </div>
         <Button
-          endIcon={<AddCircle />}
+          // endIcon={<AddCircle />}
           variant="contained"
           sx={{
             background: "#9EC3FF",

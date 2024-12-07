@@ -9,7 +9,7 @@ import {
   ThemeProvider,
 } from "@mui/material";
 
-import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+// import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 import background from "../../../assets/background_complete.png";
 
 import { useState } from "react";
@@ -101,7 +101,7 @@ export function NewDonation() {
               <Button
                 variant="contained"
                 color="primary"
-                endIcon={<ArrowForwardIcon />}
+                // endIcon={<ArrowForwardIcon />}
                 className="w-full"
                 type="submit"
               >

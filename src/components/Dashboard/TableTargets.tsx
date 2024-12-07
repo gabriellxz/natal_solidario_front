@@ -63,12 +63,12 @@ export default function TableTargets() {
 
 export default function TableTargets() {
   return (
-    <div className="bg-white mt-[94px] w-[1200px] ml-[80px] pb-[81px] border border-gray-400 rounded-3xl">
-      <div className="ml-[62px] mt-[29px] mr-[981px] mb-[25px] font-poppins text-lg font-medium w-[200px]">
+    <div className="bg-white mt-[94px] w-full pb-[81px] border border-gray-400 rounded-3xl">
+      <div className="p-[30px] pl-[70px] font-poppins text-lg font-medium">
         <span>Metas Cumpridas</span>
       </div>
       <div className="mt-[61px] font-poppins">
-        <table className="min-w-full">
+        <table className="w-full">
           <thead className="">
             <tr className="border-b border-gray-300 w-full">
               <th className="text-left py-3 px-6 pl-[46px] font-medium">

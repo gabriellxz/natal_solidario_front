@@ -1,10 +1,14 @@
 import icon_profile from "../../assets/icon_profile.svg";
 
-export default function Header() {
+interface PropsTitle {
+  title: string
+}
+
+export default function Header({ title }: PropsTitle) {
   return (
     <header className="flex items-center justify-between bg-whiteChristmas-100 w-full font-inter px-[50px] py-[30px]">
       <div>
-        <h1 className="font-semibold text-[34px]">Dashboard</h1>
+        <h1 className="font-semibold text-[34px]">{title}</h1>
       </div>
       <div className="flex items-center gap-[30px]">
         <div className="flex flex-col">

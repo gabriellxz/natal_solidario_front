@@ -5,7 +5,11 @@ import collector from "../../assets/collector.svg";
 import { Link, useMatch } from "react-router-dom";
 import logo_natal from "../../assets/logo_natal.svg";
 
-export default function NavSide() {
+interface PropsTitle {
+    setTitle: React.Dispatch<React.SetStateAction<string>>
+}
+
+export default function NavSide({ setTitle }: PropsTitle) {
     const links = [
         {
             path: "/dashboard",
@@ -17,13 +21,13 @@ export default function NavSide() {
             label: "Arrecadadores",
             img: collector
         },
-        { 
-            path: "/dashboard/doadores", 
+        {
+            path: "/dashboard/doadores",
             label: "Doadores",
             img: donor
         },
-        { 
-            path: "/dashboard/doacoes", 
+        {
+            path: "/dashboard/doacoes",
             label: "Doações",
             img: donations
         }
@@ -39,9 +43,10 @@ export default function NavSide() {
                     <ul>
                         {
                             links.map((link: any) => {
-                                const match = useMatch(link.path)
+                                const match = useMatch(link.path);
+
                                 return (
-                                    <Link to={link.path} key={link.path} className={`
+                                    <Link onClick={() => setTitle(link.label)} to={link.path} key={link.path} className={`
                                         flex gap-2 mb-[25px] cursor-pointer px-3 py-3  ${match && "bg-whiteChristmas-100 rounded-xl w-full shadow-md"}
                                     `}>
                                         <img src={link.img} alt="icon" />

@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import SideBar from "./components/Sidebar";
 import { RecentCollectionsTable } from "./components/Dashboard/RecentCollectionsTable";
 import { CardCategorys } from "./components/Dashboard/CardCategorys";
+import { useState } from "react";
 
 const collections = [
   {
@@ -189,11 +190,21 @@ const collections = [
 
 export function DashboardCollectors() {
   const location = useLocation();
+  const [title, setTitle] = useState<string>("Dashboard");
+  const [openNavSide, setOpenNavSide] = useState<boolean>(true);
   return (
     <main className="flex w-full h-screen">
-      <SideBar />
+      <SideBar
+        setOpenNavSide={setOpenNavSide}
+        setTitle={setTitle}
+        openNavSide={openNavSide}
+      />
       <div className="flex-1 flex flex-col">
-        <Header />
+        <Header
+          title={title}
+          setOpenNavSide={setOpenNavSide}
+          openNavSide={openNavSide}
+        />
         <div className="flex-1 overflow-y-auto p-6">
           {location.pathname === "/dashboard-collectors" ? (
             <>

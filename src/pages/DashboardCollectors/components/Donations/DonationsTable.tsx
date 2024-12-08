@@ -10,9 +10,10 @@ import {
   Button,
   ButtonGroup,
 } from "@mui/material";
-// import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-// import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-// import { AddCircle, Search } from "@mui/icons-material";
+import { AddCircle } from "../icons/AddCircle";
+import { Search } from "../icons/Search";
+import { ArrowLeft } from "../icons/ArrowLeft";
+import { ArrowRight } from "../icons/ArrowRight";
 
 interface Collection {
   id: number | string;
@@ -83,7 +84,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
       <div className="flex w-full justify-between mb-4">
         <div className="flex w-2/3 gap-2">
           <div className="w-full bg-zinc-200 h-9 flex gap-2 p-3 justify-center items-center rounded-lg">
-            {/* <Search className="text-zinc-500" /> */}
+            <Search className="size-5" />
             <input
               type="text"
               className="w-full bg-transparent p-1 outline-none border-none"
@@ -114,7 +115,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
           </div>
         </div>
         <Button
-          // endIcon={<AddCircle />}
+          endIcon={<AddCircle />}
           variant="contained"
           sx={{
             background: "#9EC3FF",
@@ -172,7 +173,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
               minWidth: "30px",
               height: "30px",
               borderRadius: "8px",
-              padding: "0 0px 0px 5px",
+              padding: 0,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -180,7 +181,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
               fontSize: "16px",
             }}
           >
-            {/* <ArrowBackIosIcon style={{ fontSize: "20px" }} />{" "} */}
+            <ArrowLeft className="size-4" />
           </Button>
           <div className="flex space-x-2 ">
             {renderPageNumbers().map((number, index) =>
@@ -240,7 +241,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
               fontSize: "16px",
             }}
           >
-            {/* <ArrowForwardIosIcon sx={{ fontSize: "20px" }} /> */}
+            <ArrowRight className="size-4" />
           </Button>
         </div>
       </div>

@@ -48,7 +48,7 @@ export default function NavSide(
                 openNavSide && <nav className="absolute sm:relative p-[40px] bg-blueChristmas-100 max-w-[306px] w-full h-[100dvh] font-poppins font-semibold">
                     <div>
                         <div className="flex items-center text-[26px] mb-[50px]">
-                            <XMarkIcon className="w-7 absolute right-1 cursor-pointer" onClick={() => setOpenNavSide(!openNavSide)} />
+                            <XMarkIcon className="w-7 absolute right-1 cursor-pointer sm:hidden" onClick={() => setOpenNavSide(!openNavSide)} />
                             <img src={logo_natal} alt="logo_natal" />
                         </div>
                         <div>

@@ -6,7 +6,7 @@ import { useState } from "react";
 export default function Dashboard() {
 
   const [title, setTitle] = useState<string>("Dashboard");
-  const [openNavSide, setOpenNavSide] = useState<boolean>(false);
+  const [openNavSide, setOpenNavSide] = useState<boolean>(true);
 
   return (
     <main className="flex w-full">

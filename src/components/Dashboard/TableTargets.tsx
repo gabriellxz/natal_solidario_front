@@ -63,29 +63,29 @@ export default function TableTargets() {
 
 export default function TableTargets() {
   return (
-    <div className="bg-white mt-[94px] w-full pb-[81px] border border-gray-400 rounded-3xl">
+    <div className="bg-white mt-[94px] max-w-[1200px] w-full pb-[81px] border border-gray-400 rounded-3xl">
       <div className="p-[30px] pl-[70px] font-poppins text-lg font-medium">
         <span>Metas Cumpridas</span>
       </div>
-      <div className="mt-[61px] font-poppins">
+      <div className="mt-[61px] font-poppins w-full">
         <table className="w-full">
-          <thead className="">
+          <thead className="w-full">
             <tr className="border-b border-gray-300 w-full">
-              <th className="text-left py-3 px-6 pl-[46px] font-medium">
+              <th className="text-left sm:py-3 sm:px-6 pl-[46px] font-medium">
                 Nome
               </th>
-              <th className="text-left py-3 px-6 font-medium">
+              <th className="sm:text-left sm:py-3 sm:px-6 font-medium">
                 N° de Doadores
               </th>
-              <th className="text-left py-3 px-6 font-medium">N° de Doações</th>
-              <th className="text-left py-3 px-6 font-medium">
+              <th className="sm:text-left sm:py-3 sm:px-6 font-medium">N° de Doações</th>
+              <th className="sm:text-left sm:py-3 sm:px-6 font-medium">
                 N° de Alimentos
               </th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className="w-full">
             <tr className="border-b border-gray-200">
-              <td className="py-6 px-6 pl-[46px]">Neto Betania</td>
+              <td className="py-6 px-6 pl-[46px] whitespace-nowrap">Neto Betania</td>
               <td className="py-6 px-6">20</td>
               <td className="py-6 px-6">30</td>
               <td className="py-6 px-6">20</td>

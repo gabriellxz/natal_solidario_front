@@ -48,7 +48,7 @@ export default function TableCollectors() {
                     </CardContent>
                 </Card>
             </div>
-            <div className="flex justify-center w-full px-[100px]">
+            <div className="flex justify-center w-full px-5">
                 <TableTargets/>
             </div>
         </main>

@@ -11,6 +11,7 @@ export default function Dashboard() {
   return (
     <main className="flex w-full">
       <NavSide
+        setOpenNavSide={setOpenNavSide}
         setTitle={setTitle}
         openNavSide={openNavSide}
       />

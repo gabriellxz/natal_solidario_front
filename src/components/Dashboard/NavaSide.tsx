@@ -4,8 +4,10 @@ import donor from "../../assets/donor.svg";
 import collector from "../../assets/collector.svg";
 import { Link, useMatch } from "react-router-dom";
 import logo_natal from "../../assets/logo_natal.svg";
+import { XMarkIcon } from "@heroicons/react/16/solid";
 
 interface PropsTitle {
+    setOpenNavSide: React.Dispatch<React.SetStateAction<boolean>>
     setTitle: React.Dispatch<React.SetStateAction<string>>
     openNavSide: boolean
 }
@@ -13,7 +15,8 @@ interface PropsTitle {
 export default function NavSide(
     {
         setTitle,
-        openNavSide
+        openNavSide,
+        setOpenNavSide
     }: PropsTitle
 ) {
     const links = [
@@ -42,9 +45,10 @@ export default function NavSide(
     return (
         <>
             {
-                openNavSide && <nav className="p-[40px] bg-blueChristmas-100 max-w-[306px] w-full h-[100dvh] font-poppins font-semibold">
+                openNavSide && <nav className="absolute sm:relative p-[40px] bg-blueChristmas-100 max-w-[306px] w-full h-[100dvh] font-poppins font-semibold">
                     <div>
-                        <div className="flex items-center gap-2 text-[26px] mb-[50px]">
+                        <div className="flex items-center text-[26px] mb-[50px]">
+                            <XMarkIcon className="w-7 absolute right-1 cursor-pointer" onClick={() => setOpenNavSide(!openNavSide)} />
                             <img src={logo_natal} alt="logo_natal" />
                         </div>
                         <div>

@@ -30,53 +30,44 @@ interface RecentCollectionsTableProps {
 }
 
 export function DonationsTable({ collections }: RecentCollectionsTableProps) {
-  const [page, setPage] = useState(0); // Estado da página
-  const [rowsPerPage] = useState(5); // Quantidade de itens por página
+  const [page, setPage] = useState(0);
+  const [rowsPerPage] = useState(5);
+  const [searchText, setSearchText] = useState(""); // Estado para pesquisa
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null); // Estado para categoria
 
   const handleChangePage = (newPage: number) => {
     setPage(newPage);
   };
 
-  const totalPages = Math.ceil(collections.length / rowsPerPage);
+  const filteredCollections = collections
+    .filter((collection) => {
+      const searchTerm = searchText.toLowerCase();
+      return (
+        collection.donationType.toLowerCase().includes(searchTerm) ||
+        collection.collector.toLowerCase().includes(searchTerm) ||
+        collection.donor.toLowerCase().includes(searchTerm) ||
+        collection.id.toString().toLowerCase().includes(searchTerm)
+      );
+    })
+    .filter((collection) =>
+      categoryFilter ? collection.donationType === categoryFilter : true
+    );
 
-  // Função para renderizar os números de página
+  const totalPages = Math.ceil(filteredCollections.length / rowsPerPage);
+
   const renderPageNumbers = () => {
     const pageNumbers: (number | string)[] = [];
-
-    pageNumbers.push(0); // Sempre mostra a primeira página
-
-    if (totalPages > 1) {
-      pageNumbers.push(1); // Sempre mostra a segunda página
-    }
-
-    // Sempre mostra a página 3 se existir
-    if (totalPages > 2) {
-      pageNumbers.push(2); // Página 3 sempre visível
-    }
-
-    // Adiciona a página atual se não for a primeira, segunda ou terceira
-    if (page !== 0 && page !== 1 && page !== 2 && page < totalPages - 1) {
-      pageNumbers.push(page); // Adiciona a página atual
-    }
-
-    // Adiciona os "..." quando necessário, mas não remove a última página
-    if (page + 1 < totalPages - 1) {
-      pageNumbers.push("..."); // Adiciona os "..."
-    }
-
-    // Sempre adiciona a última página, se não for visível
-    if (page < totalPages - 1 && !pageNumbers.includes(totalPages - 1)) {
-      pageNumbers.push(totalPages - 1); // Adiciona a última página
-    }
-
-    // Se estiver na última página, mostramos sempre o número da última página
-    if (page === totalPages - 1) {
-      if (!pageNumbers.includes(totalPages - 1)) {
-        pageNumbers.push(totalPages - 1); // Última página visível
-      }
-    }
-
-    return [...new Set(pageNumbers)]; // Garante que não haverá duplicados
+    pageNumbers.push(0);
+    if (totalPages > 1) pageNumbers.push(1);
+    if (totalPages > 2) pageNumbers.push(2);
+    if (page !== 0 && page !== 1 && page !== 2 && page < totalPages - 1)
+      pageNumbers.push(page);
+    if (page + 1 < totalPages - 1) pageNumbers.push("...");
+    if (page < totalPages - 1 && !pageNumbers.includes(totalPages - 1))
+      pageNumbers.push(totalPages - 1);
+    if (page === totalPages - 1 && !pageNumbers.includes(totalPages - 1))
+      pageNumbers.push(totalPages - 1);
+    return [...new Set(pageNumbers)];
   };
 
   return (
@@ -87,32 +78,91 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
             <Search className="size-5" />
             <input
               type="text"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
               className="w-full bg-transparent p-1 outline-none border-none"
               placeholder="Buscar..."
             />
           </div>
           <div>
-            <ButtonGroup>
+            <ButtonGroup sx={{ border: "1px #3f3f46" }}>
               <Button
-                variant="contained"
-                style={{
-                  background: "#FF5266",
-                  color: "#FFFFFF",
-                  cursor: "pointer",
-                  boxShadow: "none",
-                  fontWeight: "700",
+                variant={
+                  categoryFilter === "Alimentos" ? "contained" : "outlined"
+                }
+                onClick={() =>
+                  setCategoryFilter(
+                    categoryFilter === "Alimentos" ? null : "Alimentos"
+                  )
+                }
+                sx={{
+                  background:
+                    categoryFilter === "Alimentos" ? "#FF5266" : undefined,
+                  color: categoryFilter === "Alimentos" ? "#FFFFFF" : "#3f3f46",
+                  fontWeight: categoryFilter === "Alimentos" ? "700" : "normal",
+                  ":hover": categoryFilter === "Alimentos" ? "" : {background: "#fee2e2"},
+                  borderColor: "#78716c"
                 }}
               >
                 Alimentos
               </Button>
-              <Button sx={{ borderColor: "#d4d4d8", color: "#000" }}>
-                Bringredos
+              <Button
+                sx={{
+                  background:
+                    categoryFilter === "Brinquedos" ? "#FF5266" : undefined,
+                  color:
+                    categoryFilter === "Brinquedos" ? "#FFFFFF" : "#3f3f46",
+                  fontWeight:
+                    categoryFilter === "Brinquedos" ? "700" : "normal",
+                  ":hover": categoryFilter === "Brinquedos" ? "" : {background: "#fee2e2"},
+                  borderColor: "#78716c"
+                }}
+                variant={
+                  categoryFilter === "Brinquedos" ? "contained" : "outlined"
+                }
+                onClick={() =>
+                  setCategoryFilter(
+                    categoryFilter === "Brinquedos" ? null : "Brinquedos"
+                  )
+                }
+              >
+                Brinquedos
               </Button>
-              <Button sx={{ borderColor: "#d4d4d8", color: "#000" }}>
+              <Button
+                sx={{
+                  background:
+                    categoryFilter === "Roupas" ? "#FF5266" : undefined,
+                  color: categoryFilter === "Roupas" ? "#FFFFFF" : "#3f3f46",
+                  fontWeight: categoryFilter === "Roupas" ? "700" : "normal",
+                  ":hover": categoryFilter === "Roupas" ? "" : {background: "#fee2e2"},
+                  borderColor: "#78716c"
+                }}
+                variant={categoryFilter === "Roupas" ? "contained" : "outlined"}
+                onClick={() =>
+                  setCategoryFilter(
+                    categoryFilter === "Roupas" ? null : "Roupas"
+                  )
+                }
+              >
                 Roupas
               </Button>
             </ButtonGroup>
           </div>
+          {categoryFilter?.length && (
+            <Button
+              onClick={() => setCategoryFilter(null)}
+              variant="text"
+              sx={{
+                color: "#3f3f46",
+                ":hover": {
+                  background: "transparent",
+                  color: "#FF5266",
+                },
+              }}
+            >
+              limpar
+            </Button>
+          )}
         </div>
         <Button
           endIcon={<AddCircle />}
@@ -143,7 +193,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {collections
+          {filteredCollections
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .map((collection) => (
               <TableRow key={collection.id}>
@@ -158,11 +208,11 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
         </TableBody>
       </Table>
       <div className="flex justify-between items-center p-2 mt-2">
-        <div className="">
+        <div>
           <h3>
             Mostrando {page * rowsPerPage + 1} a{" "}
-            {Math.min((page + 1) * rowsPerPage, collections.length)} de{" "}
-            {collections.length}
+            {Math.min((page + 1) * rowsPerPage, filteredCollections.length)} de{" "}
+            {filteredCollections.length}
           </h3>
         </div>
         <div className="flex gap-2">
@@ -183,7 +233,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
           >
             <ArrowLeft className="size-4" />
           </Button>
-          <div className="flex space-x-2 ">
+          <div className="flex space-x-2">
             {renderPageNumbers().map((number, index) =>
               typeof number === "string" ? (
                 <div
@@ -204,7 +254,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
                 <Button
                   key={index}
                   onClick={() => handleChangePage(number)}
-                  variant="outlined"
+                  variant={number === page ? "contained" : "outlined"}
                   sx={{
                     minWidth: "30px",
                     height: "30px",

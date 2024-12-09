@@ -14,8 +14,10 @@ import { AddCircle } from "../icons/AddCircle";
 import { Search } from "../icons/Search";
 import { ArrowLeft } from "../icons/ArrowLeft";
 import { ArrowRight } from "../icons/ArrowRight";
+import { EllipsisVertical } from "../icons/EllipsisVertical";
+import { useNavigate } from "react-router-dom";
 
-interface Collection {
+interface Donation {
   id: number | string;
   donationType: string;
   quantity: number;
@@ -25,11 +27,13 @@ interface Collection {
   time: string;
 }
 
-interface RecentCollectionsTableProps {
-  collections: Collection[];
+interface DonationsTableProps {
+  donations: Donation[];
+  isLoading: boolean;
 }
 
-export function DonationsTable({ collections }: RecentCollectionsTableProps) {
+export function DonationsTable({ donations, isLoading }: DonationsTableProps) {
+  const navigate = useNavigate();
   const [page, setPage] = useState(0);
   const [rowsPerPage] = useState(5);
   const [searchText, setSearchText] = useState(""); // Estado para pesquisa
@@ -39,21 +43,21 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
     setPage(newPage);
   };
 
-  const filteredCollections = collections
-    .filter((collection) => {
+  const filteredDonations = donations
+    .filter((donation) => {
       const searchTerm = searchText.toLowerCase();
       return (
-        collection.donationType.toLowerCase().includes(searchTerm) ||
-        collection.collector.toLowerCase().includes(searchTerm) ||
-        collection.donor.toLowerCase().includes(searchTerm) ||
-        collection.id.toString().toLowerCase().includes(searchTerm)
+        donation.donationType.toLowerCase().includes(searchTerm) ||
+        donation.collector.toLowerCase().includes(searchTerm) ||
+        donation.donor.toLowerCase().includes(searchTerm) ||
+        donation.id.toString().toLowerCase().includes(searchTerm)
       );
     })
-    .filter((collection) =>
-      categoryFilter ? collection.donationType === categoryFilter : true
+    .filter((donation) =>
+      categoryFilter ? donation.donationType === categoryFilter : true
     );
 
-  const totalPages = Math.ceil(filteredCollections.length / rowsPerPage);
+  const totalPages = Math.ceil(filteredDonations.length / rowsPerPage);
 
   const renderPageNumbers = () => {
     const pageNumbers: (number | string)[] = [];
@@ -100,8 +104,11 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
                     categoryFilter === "Alimentos" ? "#FF5266" : undefined,
                   color: categoryFilter === "Alimentos" ? "#FFFFFF" : "#3f3f46",
                   fontWeight: categoryFilter === "Alimentos" ? "700" : "normal",
-                  ":hover": categoryFilter === "Alimentos" ? "" : {background: "#fee2e2"},
-                  borderColor: "#78716c"
+                  ":hover":
+                    categoryFilter === "Alimentos"
+                      ? ""
+                      : { background: "#fee2e2" },
+                  borderColor: "#78716c",
                 }}
               >
                 Alimentos
@@ -114,8 +121,11 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
                     categoryFilter === "Brinquedos" ? "#FFFFFF" : "#3f3f46",
                   fontWeight:
                     categoryFilter === "Brinquedos" ? "700" : "normal",
-                  ":hover": categoryFilter === "Brinquedos" ? "" : {background: "#fee2e2"},
-                  borderColor: "#78716c"
+                  ":hover":
+                    categoryFilter === "Brinquedos"
+                      ? ""
+                      : { background: "#fee2e2" },
+                  borderColor: "#78716c",
                 }}
                 variant={
                   categoryFilter === "Brinquedos" ? "contained" : "outlined"
@@ -134,8 +144,11 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
                     categoryFilter === "Roupas" ? "#FF5266" : undefined,
                   color: categoryFilter === "Roupas" ? "#FFFFFF" : "#3f3f46",
                   fontWeight: categoryFilter === "Roupas" ? "700" : "normal",
-                  ":hover": categoryFilter === "Roupas" ? "" : {background: "#fee2e2"},
-                  borderColor: "#78716c"
+                  ":hover":
+                    categoryFilter === "Roupas"
+                      ? ""
+                      : { background: "#fee2e2" },
+                  borderColor: "#78716c",
                 }}
                 variant={categoryFilter === "Roupas" ? "contained" : "outlined"}
                 onClick={() =>
@@ -165,6 +178,9 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
           )}
         </div>
         <Button
+          onClick={() => {
+            navigate("/dashboard-collectors/new-donation", { replace: true });
+          }}
           endIcon={<AddCircle />}
           variant="contained"
           sx={{
@@ -193,16 +209,28 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {filteredCollections
+          {isLoading ? (
+            <h2>carregando...</h2>
+          ) : !donations.length ? (
+            <h2>Nenhuma doação encontrada</h2>
+          ) : (
+            ""
+          )}
+          {filteredDonations
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((collection) => (
-              <TableRow key={collection.id}>
-                <TableCell>{collection.id}</TableCell>
-                <TableCell>{collection.donationType}</TableCell>
-                <TableCell>{collection.quantity}</TableCell>
-                <TableCell>{collection.collector}</TableCell>
-                <TableCell>{collection.donor}</TableCell>
-                <TableCell>{`${collection.date} ${collection.time}`}</TableCell>
+            .map((donation) => (
+              <TableRow key={donation.id}>
+                <TableCell>{donation.id}</TableCell>
+                <TableCell>{donation.donationType}</TableCell>
+                <TableCell>{donation.quantity}</TableCell>
+                <TableCell>{donation.collector}</TableCell>
+                <TableCell>{donation.donor}</TableCell>
+                <TableCell width="150px">{`${donation.date} ${donation.time}`}</TableCell>
+                <TableCell align="left">
+                  <button>
+                    <EllipsisVertical />
+                  </button>
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>
@@ -211,8 +239,8 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
         <div>
           <h3>
             Mostrando {page * rowsPerPage + 1} a{" "}
-            {Math.min((page + 1) * rowsPerPage, filteredCollections.length)} de{" "}
-            {filteredCollections.length}
+            {Math.min((page + 1) * rowsPerPage, filteredDonations.length)} de{" "}
+            {filteredDonations.length}
           </h3>
         </div>
         <div className="flex gap-2">

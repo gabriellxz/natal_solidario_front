@@ -10,11 +10,14 @@ import {
   Button,
   ButtonGroup,
 } from "@mui/material";
-// import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-// import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-// import { AddCircle, Search } from "@mui/icons-material";
+import { AddCircle } from "../icons/AddCircle";
+import { Search } from "../icons/Search";
+import { ArrowLeft } from "../icons/ArrowLeft";
+import { ArrowRight } from "../icons/ArrowRight";
+import { EllipsisVertical } from "../icons/EllipsisVertical";
+import { useNavigate } from "react-router-dom";
 
-interface Collection {
+interface Donation {
   id: number | string;
   donationType: string;
   quantity: number;
@@ -24,58 +27,51 @@ interface Collection {
   time: string;
 }
 
-interface RecentCollectionsTableProps {
-  collections: Collection[];
+interface DonationsTableProps {
+  donations: Donation[];
+  isLoading: boolean;
 }
 
-export function DonationsTable({ collections }: RecentCollectionsTableProps) {
-  const [page, setPage] = useState(0); // Estado da página
-  const [rowsPerPage] = useState(5); // Quantidade de itens por página
+export function DonationsTable({ donations, isLoading }: DonationsTableProps) {
+  const navigate = useNavigate();
+  const [page, setPage] = useState(0);
+  const [rowsPerPage] = useState(5);
+  const [searchText, setSearchText] = useState(""); // Estado para pesquisa
+  const [categoryFilter, setCategoryFilter] = useState<string | null>(null); // Estado para categoria
 
   const handleChangePage = (newPage: number) => {
     setPage(newPage);
   };
 
-  const totalPages = Math.ceil(collections.length / rowsPerPage);
+  const filteredDonations = donations
+    .filter((donation) => {
+      const searchTerm = searchText.toLowerCase();
+      return (
+        donation.donationType.toLowerCase().includes(searchTerm) ||
+        donation.collector.toLowerCase().includes(searchTerm) ||
+        donation.donor.toLowerCase().includes(searchTerm) ||
+        donation.id.toString().toLowerCase().includes(searchTerm)
+      );
+    })
+    .filter((donation) =>
+      categoryFilter ? donation.donationType === categoryFilter : true
+    );
 
-  // Função para renderizar os números de página
+  const totalPages = Math.ceil(filteredDonations.length / rowsPerPage);
+
   const renderPageNumbers = () => {
     const pageNumbers: (number | string)[] = [];
-
-    pageNumbers.push(0); // Sempre mostra a primeira página
-
-    if (totalPages > 1) {
-      pageNumbers.push(1); // Sempre mostra a segunda página
-    }
-
-    // Sempre mostra a página 3 se existir
-    if (totalPages > 2) {
-      pageNumbers.push(2); // Página 3 sempre visível
-    }
-
-    // Adiciona a página atual se não for a primeira, segunda ou terceira
-    if (page !== 0 && page !== 1 && page !== 2 && page < totalPages - 1) {
-      pageNumbers.push(page); // Adiciona a página atual
-    }
-
-    // Adiciona os "..." quando necessário, mas não remove a última página
-    if (page + 1 < totalPages - 1) {
-      pageNumbers.push("..."); // Adiciona os "..."
-    }
-
-    // Sempre adiciona a última página, se não for visível
-    if (page < totalPages - 1 && !pageNumbers.includes(totalPages - 1)) {
-      pageNumbers.push(totalPages - 1); // Adiciona a última página
-    }
-
-    // Se estiver na última página, mostramos sempre o número da última página
-    if (page === totalPages - 1) {
-      if (!pageNumbers.includes(totalPages - 1)) {
-        pageNumbers.push(totalPages - 1); // Última página visível
-      }
-    }
-
-    return [...new Set(pageNumbers)]; // Garante que não haverá duplicados
+    pageNumbers.push(0);
+    if (totalPages > 1) pageNumbers.push(1);
+    if (totalPages > 2) pageNumbers.push(2);
+    if (page !== 0 && page !== 1 && page !== 2 && page < totalPages - 1)
+      pageNumbers.push(page);
+    if (page + 1 < totalPages - 1) pageNumbers.push("...");
+    if (page < totalPages - 1 && !pageNumbers.includes(totalPages - 1))
+      pageNumbers.push(totalPages - 1);
+    if (page === totalPages - 1 && !pageNumbers.includes(totalPages - 1))
+      pageNumbers.push(totalPages - 1);
+    return [...new Set(pageNumbers)];
   };
 
   return (
@@ -83,38 +79,109 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
       <div className="flex w-full justify-between mb-4">
         <div className="flex w-2/3 gap-2">
           <div className="w-full bg-zinc-200 h-9 flex gap-2 p-3 justify-center items-center rounded-lg">
-            {/* <Search className="text-zinc-500" /> */}
+            <Search className="size-5" />
             <input
               type="text"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
               className="w-full bg-transparent p-1 outline-none border-none"
               placeholder="Buscar..."
             />
           </div>
           <div>
-            <ButtonGroup>
+            <ButtonGroup sx={{ border: "1px #3f3f46" }}>
               <Button
-                variant="contained"
-                style={{
-                  background: "#FF5266",
-                  color: "#FFFFFF",
-                  cursor: "pointer",
-                  boxShadow: "none",
-                  fontWeight: "700",
+                variant={
+                  categoryFilter === "Alimentos" ? "contained" : "outlined"
+                }
+                onClick={() =>
+                  setCategoryFilter(
+                    categoryFilter === "Alimentos" ? null : "Alimentos"
+                  )
+                }
+                sx={{
+                  background:
+                    categoryFilter === "Alimentos" ? "#FF5266" : undefined,
+                  color: categoryFilter === "Alimentos" ? "#FFFFFF" : "#3f3f46",
+                  fontWeight: categoryFilter === "Alimentos" ? "700" : "normal",
+                  ":hover":
+                    categoryFilter === "Alimentos"
+                      ? ""
+                      : { background: "#fee2e2" },
+                  borderColor: "#78716c",
                 }}
               >
                 Alimentos
               </Button>
-              <Button sx={{ borderColor: "#d4d4d8", color: "#000" }}>
-                Bringredos
+              <Button
+                sx={{
+                  background:
+                    categoryFilter === "Brinquedos" ? "#FF5266" : undefined,
+                  color:
+                    categoryFilter === "Brinquedos" ? "#FFFFFF" : "#3f3f46",
+                  fontWeight:
+                    categoryFilter === "Brinquedos" ? "700" : "normal",
+                  ":hover":
+                    categoryFilter === "Brinquedos"
+                      ? ""
+                      : { background: "#fee2e2" },
+                  borderColor: "#78716c",
+                }}
+                variant={
+                  categoryFilter === "Brinquedos" ? "contained" : "outlined"
+                }
+                onClick={() =>
+                  setCategoryFilter(
+                    categoryFilter === "Brinquedos" ? null : "Brinquedos"
+                  )
+                }
+              >
+                Brinquedos
               </Button>
-              <Button sx={{ borderColor: "#d4d4d8", color: "#000" }}>
+              <Button
+                sx={{
+                  background:
+                    categoryFilter === "Roupas" ? "#FF5266" : undefined,
+                  color: categoryFilter === "Roupas" ? "#FFFFFF" : "#3f3f46",
+                  fontWeight: categoryFilter === "Roupas" ? "700" : "normal",
+                  ":hover":
+                    categoryFilter === "Roupas"
+                      ? ""
+                      : { background: "#fee2e2" },
+                  borderColor: "#78716c",
+                }}
+                variant={categoryFilter === "Roupas" ? "contained" : "outlined"}
+                onClick={() =>
+                  setCategoryFilter(
+                    categoryFilter === "Roupas" ? null : "Roupas"
+                  )
+                }
+              >
                 Roupas
               </Button>
             </ButtonGroup>
           </div>
+          {categoryFilter?.length && (
+            <Button
+              onClick={() => setCategoryFilter(null)}
+              variant="text"
+              sx={{
+                color: "#3f3f46",
+                ":hover": {
+                  background: "transparent",
+                  color: "#FF5266",
+                },
+              }}
+            >
+              limpar
+            </Button>
+          )}
         </div>
         <Button
-          // endIcon={<AddCircle />}
+          onClick={() => {
+            navigate("/dashboard-collectors/new-donation", { replace: true });
+          }}
+          endIcon={<AddCircle />}
           variant="contained"
           sx={{
             background: "#9EC3FF",
@@ -142,26 +209,38 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {collections
+          {isLoading ? (
+            <h2>carregando...</h2>
+          ) : !donations.length ? (
+            <h2>Nenhuma doação encontrada</h2>
+          ) : (
+            ""
+          )}
+          {filteredDonations
             .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            .map((collection) => (
-              <TableRow key={collection.id}>
-                <TableCell>{collection.id}</TableCell>
-                <TableCell>{collection.donationType}</TableCell>
-                <TableCell>{collection.quantity}</TableCell>
-                <TableCell>{collection.collector}</TableCell>
-                <TableCell>{collection.donor}</TableCell>
-                <TableCell>{`${collection.date} ${collection.time}`}</TableCell>
+            .map((donation) => (
+              <TableRow key={donation.id}>
+                <TableCell>{donation.id}</TableCell>
+                <TableCell>{donation.donationType}</TableCell>
+                <TableCell>{donation.quantity}</TableCell>
+                <TableCell>{donation.collector}</TableCell>
+                <TableCell>{donation.donor}</TableCell>
+                <TableCell width="150px">{`${donation.date} ${donation.time}`}</TableCell>
+                <TableCell align="left">
+                  <button>
+                    <EllipsisVertical />
+                  </button>
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>
       </Table>
       <div className="flex justify-between items-center p-2 mt-2">
-        <div className="">
+        <div>
           <h3>
             Mostrando {page * rowsPerPage + 1} a{" "}
-            {Math.min((page + 1) * rowsPerPage, collections.length)} de{" "}
-            {collections.length}
+            {Math.min((page + 1) * rowsPerPage, filteredDonations.length)} de{" "}
+            {filteredDonations.length}
           </h3>
         </div>
         <div className="flex gap-2">
@@ -172,7 +251,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
               minWidth: "30px",
               height: "30px",
               borderRadius: "8px",
-              padding: "0 0px 0px 5px",
+              padding: 0,
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -180,9 +259,9 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
               fontSize: "16px",
             }}
           >
-            {/* <ArrowBackIosIcon style={{ fontSize: "20px" }} />{" "} */}
+            <ArrowLeft className="size-4" />
           </Button>
-          <div className="flex space-x-2 ">
+          <div className="flex space-x-2">
             {renderPageNumbers().map((number, index) =>
               typeof number === "string" ? (
                 <div
@@ -203,7 +282,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
                 <Button
                   key={index}
                   onClick={() => handleChangePage(number)}
-                  variant="outlined"
+                  variant={number === page ? "contained" : "outlined"}
                   sx={{
                     minWidth: "30px",
                     height: "30px",
@@ -240,7 +319,7 @@ export function DonationsTable({ collections }: RecentCollectionsTableProps) {
               fontSize: "16px",
             }}
           >
-            {/* <ArrowForwardIosIcon sx={{ fontSize: "20px" }} /> */}
+            <ArrowRight className="size-4" />
           </Button>
         </div>
       </div>

@@ -1,4 +1,3 @@
-// import { AddCircle } from "@mui/icons-material";
 import {
   Table,
   TableBody,
@@ -9,6 +8,8 @@ import {
   Paper,
   Button,
 } from "@mui/material";
+import { AddCircle } from "../icons/AddCircle";
+import { EllipsisVertical } from "../icons/EllipsisVertical";
 
 interface Collection {
   id: number | string;
@@ -47,7 +48,7 @@ export function RecentCollectionsTable({
           <p className="text-sm">{collections.length} arrecadações feitas</p>
         </div>
         <Button
-          // endIcon={<AddCircle />}
+          endIcon={<AddCircle />}
           variant="contained"
           sx={{
             background: "#9EC3FF",
@@ -82,7 +83,10 @@ export function RecentCollectionsTable({
               <TableCell>{collection.quantity}</TableCell>
               <TableCell>{collection.collector}</TableCell>
               <TableCell>{collection.donor}</TableCell>
-              <TableCell>{`${collection.date} ${collection.time}`}</TableCell>
+              <TableCell width="150px">{`${collection.date} ${collection.time}`}</TableCell>
+              <TableCell>
+                <EllipsisVertical />
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

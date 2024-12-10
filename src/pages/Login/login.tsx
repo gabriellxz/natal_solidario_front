@@ -16,9 +16,9 @@ function App() {
         alt="Logo Natal Solidário"
         className="absolute top-5 left-10 w-20 h-auto"
       />
-      {/* Fundo com estrelas cobrindo todo o céu */}
+      
       <div className="absolute top-0 left-0 w-full h-full">
-        {/* Estrelas no lado esquerdo */}
+        {/* estrelas no lado esquerdo */}
         <div className="absolute top-0 left-0 w-1/2 h-full">
           <img
             src={estrelas}
@@ -36,7 +36,7 @@ function App() {
             className="absolute top-2/3 left-0 w-full h-1/3 object-cover opacity-80"
           />
         </div>
-        {/* Estrelas no lado direito */}
+        {/* estrelas no lado direito */}
         <div className="absolute top-0 right-0 w-1/2 h-full">
           <img
             src={estrelas}
@@ -57,7 +57,7 @@ function App() {
       </div>
       <div className="flex flex-col items-center justify-center relative z-10 h-full w-full">
   <div className="flex items-center space-x-60 mt-24 ml-28"> 
-    {/* Papai Noel e login */}
+    {/* papai Noel e login */}
     <img
       src={papaiNoel}
       alt="Papai Noel"
@@ -105,7 +105,7 @@ function App() {
   </div>
 </div>
 
-      {/* Rodapé com árvores e montanhas */}
+      {/* rodapé com árvores e montanhas */}
       <div className="absolute bottom-0 left-0 w-full">
         <div className="relative">
           <img

@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Dashboard from "../pages/Dashboard";
 import Login from "../pages/Login/login";
 import Collectors from "../pages/Dashboard/Collectors/Collectors";
-import { Donors } from "../pages/DashboardCollectors/Donors/Donors";
+import {Donors}  from "../pages/DashboardCollectors/Donors/Donors";
 import { DashboardCollectors } from "../pages/DashboardCollectors";
 import TableCollectors from "../pages/Dashboard/TableCollectors/TableCollectors";
 import { NewDonation } from "../pages/DashboardCollectors/NewDonation/NewDonation";
@@ -26,8 +26,7 @@ export default function RoutesMain() {
         <Route
           path="/dashboard-collectors/new-donation"
           element={<NewDonation />}
-        />
-        <Route path="/doacao" element={<DonationPage />} /> 
+        /> 
         <Route path="/dashboard-collectors/confirm-donation" element={<DonationPage />} />
 
       </Routes>

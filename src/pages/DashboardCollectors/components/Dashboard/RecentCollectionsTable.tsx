@@ -13,19 +13,9 @@ import {
 import { AddCircle } from "../icons/AddCircle";
 import { EllipsisVertical } from "../icons/EllipsisVertical";
 import { useState } from "react";
-
-interface Collection {
-  id: number | string;
-  donationType: string;
-  quantity: number;
-  collector: string;
-  donor: string;
-  date: string;
-  time: string;
-}
-
+import { Donation } from "../../types";
 interface RecentCollectionsTableProps {
-  collections: Collection[];
+  collections: Donation[];
   isLoading: boolean;
 }
 
@@ -99,10 +89,15 @@ export function RecentCollectionsTable({
           {recentCollections.map((collection) => (
             <TableRow key={collection.id}>
               <TableCell>{collection.id}</TableCell>
-              <TableCell>{collection.donationType}</TableCell>
-              <TableCell>{collection.quantity}</TableCell>
-              <TableCell>{collection.collector}</TableCell>
-              <TableCell>{collection.donor}</TableCell>
+                <TableCell>{collection.selected.join(", ")}</TableCell>
+                <TableCell>
+                  {collection.quantities[collection.selected[0]]}
+                </TableCell>
+                <TableCell>
+                  {collection.formData.firstName} {collection.formData.lastName}
+                </TableCell>
+                <TableCell>{collection.formData.firstName}</TableCell>
+                <TableCell width="150px">{`${collection.date} ${collection.time}`}</TableCell>
               <TableCell width="150px">{`${collection.date} ${collection.time}`}</TableCell>
               <TableCell>
                 <button aria-describedby={id} onClick={handleClick}>

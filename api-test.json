@@ -1,220 +1,280 @@
 {
   "donations": [
     {
-      "id": "1001",
-      "donationType": "Roupas",
-      "quantity": 5,
-      "collector": "João",
-      "donor": "Maria",
-      "date": "2024-12-01",
-      "time": "14:30"
+      "id": "8a4e",
+      "selected": [
+        "roupas",
+        "brinquedos"
+      ],
+      "quantities": {
+        "roupas": 2,
+        "brinquedos": 2
+      },
+      "description": "sssssssss",
+      "formData": {
+        "firstName": "antony",
+        "lastName": "aaaa",
+        "contact": "antony@gmail",
+        "cep": "123456",
+        "city": "d",
+        "address": "uyrdrcurycyvrycyrdydyurcurcyvyrdtrxcytdyrjcyrd"
+      },
+      "date": "10/12/2024",
+      "time": "15:38:10"
     },
     {
-      "id": "1008",
-      "donationType": "Brinquedos",
-      "quantity": 12,
-      "collector": "Lucas",
-      "donor": "Carlos",
-      "date": "2024-12-08",
-      "time": "11:45"
+      "id": "8a4f",
+      "selected": [
+        "roupas",
+        "alimentos"
+      ],
+      "quantities": {
+        "roupas": 1,
+        "alimentos": 5
+      },
+      "description": "donation of food and clothes",
+      "formData": {
+        "firstName": "maria",
+        "lastName": "silva",
+        "contact": "maria@gmail",
+        "cep": "654321",
+        "city": "sao paulo",
+        "address": "av paulista 1000"
+      },
+      "date": "11/12/2024",
+      "time": "10:20:50"
     },
     {
-      "id": "1009",
-      "donationType": "Alimentos",
-      "quantity": 18,
-      "collector": "Pedro",
-      "donor": "Ana",
-      "date": "2024-12-09",
-      "time": "14:00"
+      "id": "8a50",
+      "selected": [
+        "roupas"
+      ],
+      "quantities": {
+        "roupas": 3
+      },
+      "description": "donation of clothes for children",
+      "formData": {
+        "firstName": "lucas",
+        "lastName": "pereira",
+        "contact": "lucas@hotmail",
+        "cep": "987654",
+        "city": "rj",
+        "address": "rua das flores 45"
+      },
+      "date": "12/12/2024",
+      "time": "12:30:15"
     },
     {
-      "id": "1010",
-      "donationType": "Roupas",
-      "quantity": 30,
-      "collector": "Fernanda",
-      "donor": "Mariana",
-      "date": "2024-12-10",
-      "time": "16:20"
+      "id": "8a51",
+      "selected": [
+        "brinquedos",
+        "roupas"
+      ],
+      "quantities": {
+        "brinquedos": 1,
+        "roupas": 4
+      },
+      "description": "donation of toys and clothes for charity",
+      "formData": {
+        "firstName": "carla",
+        "lastName": "rodrigues",
+        "contact": "carla@gmail.com",
+        "cep": "123789",
+        "city": "belo horizonte",
+        "address": "rua das acacias 10"
+      },
+      "date": "13/12/2024",
+      "time": "14:45:22"
     },
     {
-      "id": "1011",
-      "donationType": "Brinquedos",
-      "quantity": 8,
-      "collector": "Carlos",
-      "donor": "Lucas",
-      "date": "2024-12-11",
-      "time": "17:30"
+      "id": "8a52",
+      "selected": [
+        "alimentos"
+      ],
+      "quantities": {
+        "alimentos": 10
+      },
+      "description": "donation of non-perishable food",
+      "formData": {
+        "firstName": "pedro",
+        "lastName": "alves",
+        "contact": "pedro@hotmail",
+        "cep": "321654",
+        "city": "curitiba",
+        "address": "avenida brasil 500"
+      },
+      "date": "14/12/2024",
+      "time": "09:15:50"
     },
     {
-      "id": "1012",
-      "donationType": "Alimentos",
-      "quantity": 15,
-      "collector": "Maria",
-      "donor": "Pedro",
-      "date": "2024-12-12",
-      "time": "13:45"
+      "id": "8a53",
+      "selected": [
+        "roupas",
+        "alimentos"
+      ],
+      "quantities": {
+        "roupas": 5,
+        "alimentos": 3
+      },
+      "description": "clothes and food for the needy",
+      "formData": {
+        "firstName": "beatriz",
+        "lastName": "souza",
+        "contact": "beatriz@yahoo.com",
+        "cep": "456123",
+        "city": "porto alegre",
+        "address": "rua da paz 77"
+      },
+      "date": "15/12/2024",
+      "time": "16:05:40"
     },
     {
-      "id": "1013",
-      "donationType": "Roupas",
-      "quantity": 20,
-      "collector": "Ana",
-      "donor": "João",
-      "date": "2024-12-13",
-      "time": "10:00"
+      "id": "8a54",
+      "selected": [
+        "roupas",
+        "brinquedos"
+      ],
+      "quantities": {
+        "roupas": 3,
+        "brinquedos": 2
+      },
+      "description": "donation of clothes and toys for children in need",
+      "formData": {
+        "firstName": "jose",
+        "lastName": "lima",
+        "contact": "jose@gmail.com",
+        "cep": "987321",
+        "city": "florianopolis",
+        "address": "rua da montanha 88"
+      },
+      "date": "16/12/2024",
+      "time": "18:20:30"
     },
     {
-      "id": "1014",
-      "donationType": "Brinquedos",
-      "quantity": 5,
-      "collector": "Carlos",
-      "donor": "Lucas",
-      "date": "2024-12-14",
-      "time": "14:00"
+      "id": "8a55",
+      "selected": [
+        "alimentos"
+      ],
+      "quantities": {
+        "alimentos": 7
+      },
+      "description": "donation of food to a local shelter",
+      "formData": {
+        "firstName": "ana",
+        "lastName": "carvalho",
+        "contact": "ana@outlook.com",
+        "cep": "321987",
+        "city": "salvador",
+        "address": "rua das palmeiras 100"
+      },
+      "date": "17/12/2024",
+      "time": "19:50:10"
     },
     {
-      "id": "1015",
-      "donationType": "Alimentos",
-      "quantity": 10,
-      "collector": "Pedro",
-      "donor": "Ana",
-      "date": "2024-12-15",
-      "time": "15:30"
+      "id": "8a56",
+      "selected": [
+        "brinquedos",
+        "roupas"
+      ],
+      "quantities": {
+        "brinquedos": 4,
+        "roupas": 6
+      },
+      "description": "donation of toys and clothes for orphanages",
+      "formData": {
+        "firstName": "gabriel",
+        "lastName": "melo",
+        "contact": "gabriel@gmail",
+        "cep": "654987",
+        "city": "recife",
+        "address": "rua da liberdade 55"
+      },
+      "date": "18/12/2024",
+      "time": "20:30:40"
     },
     {
-      "id": "1016",
-      "donationType": "Roupas",
-      "quantity": 18,
-      "collector": "Lucas",
-      "donor": "Carlos",
-      "date": "2024-12-16",
-      "time": "16:50"
+      "id": "7619",
+      "selected": [
+        "roupas",
+        "alimento"
+      ],
+      "quantities": {
+        "roupas": 3,
+        "alimento": 33
+      },
+      "description": "dddddddddddddddddd",
+      "formData": {
+        "firstName": "aaa",
+        "lastName": "aaaa",
+        "contact": "antony@gmail",
+        "cep": "d",
+        "city": "aaa",
+        "address": "sssssssssssssssssss"
+      },
+      "date": "10/12/2024",
+      "time": "16:09:26"
     },
     {
-      "id": "1017",
-      "donationType": "Brinquedos",
-      "quantity": 25,
-      "collector": "João",
-      "donor": "Mariana",
-      "date": "2024-12-17",
-      "time": "18:15"
+      "id": "945a",
+      "selected": [
+        "roupas",
+        "brinquedos"
+      ],
+      "quantities": {
+        "roupas": 3,
+        "brinquedos": 3
+      },
+      "description": "ddddddddddddddd",
+      "formData": {
+        "firstName": "antony",
+        "lastName": "aaaa",
+        "contact": "antony@gmail",
+        "cep": "aa",
+        "city": "aaa",
+        "address": "aaa"
+      },
+      "date": "10/12/2024",
+      "time": "16:10:00"
     },
     {
-      "id": "1018",
-      "donationType": "Alimentos",
-      "quantity": 30,
-      "collector": "Ana",
-      "donor": "Pedro",
-      "date": "2024-12-18",
-      "time": "10:30"
+      "id": "6aa1",
+      "selected": [
+        "brinquedos"
+      ],
+      "quantities": {
+        "brinquedos": 100
+      },
+      "description": "blBL",
+      "formData": {
+        "firstName": "antony",
+        "lastName": "santos",
+        "contact": "antony@gmail",
+        "cep": "000000000000000000000000",
+        "city": "acarape",
+        "address": "uyrdrcurycyvrycyrdydyurcurcyvyrdtrxcytdyrjcyrd"
+      },
+      "date": "10/12/2024",
+      "time": "16:12:14"
     },
     {
-      "id": "1019",
-      "donationType": "Roupas",
-      "quantity": 10,
-      "collector": "Carlos",
-      "donor": "Fernanda",
-      "date": "2024-12-19",
-      "time": "12:00"
-    },
-    {
-      "id": "1020",
-      "donationType": "Brinquedos",
-      "quantity": 15,
-      "collector": "Mariana",
-      "donor": "João",
-      "date": "2024-12-20",
-      "time": "13:00"
-    },
-    {
-      "id": "1021",
-      "donationType": "Alimentos",
-      "quantity": 22,
-      "collector": "João",
-      "donor": "Ana",
-      "date": "2024-12-21",
-      "time": "15:45"
-    },
-    {
-      "id": "1022",
-      "donationType": "Roupas",
-      "quantity": 13,
-      "collector": "Lucas",
-      "donor": "Maria",
-      "date": "2024-12-22",
-      "time": "10:15"
-    },
-    {
-      "id": "1023",
-      "donationType": "Brinquedos",
-      "quantity": 19,
-      "collector": "Pedro",
-      "donor": "Carlos",
-      "date": "2024-12-23",
-      "time": "16:30"
-    },
-    {
-      "id": "1024",
-      "donationType": "Roupas",
-      "quantity": 25,
-      "collector": "Fernanda",
-      "donor": "Lucas",
-      "date": "2024-12-24",
-      "time": "17:00"
-    },
-    {
-      "id": "1025",
-      "donationType": "Alimentos",
-      "quantity": 35,
-      "collector": "Mariana",
-      "donor": "João",
-      "date": "2024-12-25",
-      "time": "11:20"
-    },
-    {
-      "id": "1026",
-      "donationType": "Brinquedos",
-      "quantity": 14,
-      "collector": "Maria",
-      "donor": "Ana",
-      "date": "2024-12-26",
-      "time": "12:45"
-    },
-    {
-      "id": "1027",
-      "donationType": "Roupas",
-      "quantity": 18,
-      "collector": "João",
-      "donor": "Pedro",
-      "date": "2024-12-27",
-      "time": "14:10"
-    },
-    {
-      "id": "1028",
-      "donationType": "Alimentos",
-      "quantity": 20,
-      "collector": "Carlos",
-      "donor": "Fernanda",
-      "date": "2024-12-28",
-      "time": "15:00"
-    },
-    {
-      "id": "1029",
-      "donationType": "Brinquedos",
-      "quantity": 8,
-      "collector": "Ana",
-      "donor": "Lucas",
-      "date": "2024-12-29",
-      "time": "16:15"
-    },
-    {
-      "id": "1030",
-      "donationType": "Roupas",
-      "quantity": 15,
-      "collector": "Pedro",
-      "donor": "Carlos",
-      "date": "2024-12-30",
-      "time": "17:25"
+      "id": "4a74",
+      "selected": [
+        "alimento"
+      ],
+      "quantities": {
+        "alimento": 2
+      },
+      "description": "",
+      "formData": {
+        "firstName": "tony",
+        "lastName": "an",
+        "contact": "antony@gmail",
+        "cep": "234r3682",
+        "city": "casa",
+        "address": "rua"
+      },
+      "date": "10/12/2024",
+      "time": "16:14:29"
     }
   ]
 }

@@ -18,17 +18,7 @@ import { ArrowLeft } from "../icons/ArrowLeft";
 import { ArrowRight } from "../icons/ArrowRight";
 import { EllipsisVertical } from "../icons/EllipsisVertical";
 import { useNavigate } from "react-router-dom";
-
-interface Donation {
-  id: number | string;
-  donationType: string;
-  quantity: number;
-  collector: string;
-  donor: string;
-  date: string;
-  time: string;
-}
-
+import { Donation } from "../../types";
 interface DonationsTableProps {
   donations: Donation[];
   isLoading: boolean;
@@ -48,17 +38,20 @@ export function DonationsTable({ donations, isLoading }: DonationsTableProps) {
   const filteredDonations = donations
     .filter((donation) => {
       const searchTerm = searchText.toLowerCase();
+      // Filtro de busca (nome do doador, id e categorias selecionadas)
       return (
-        donation.donationType.toLowerCase().includes(searchTerm) ||
-        donation.collector.toLowerCase().includes(searchTerm) ||
-        donation.donor.toLowerCase().includes(searchTerm) ||
+        donation.selected.join(" ").toLowerCase().includes(searchTerm) ||
+        donation.formData.firstName.toLowerCase().includes(searchTerm) ||
+        donation.formData.lastName.toLowerCase().includes(searchTerm) ||
         donation.id.toString().toLowerCase().includes(searchTerm)
       );
     })
-    .filter((donation) =>
-      categoryFilter ? donation.donationType === categoryFilter : true
-    );
-
+    .filter((donation) => {
+      // Filtro de categoria (se a categoria está selecionada)
+      return categoryFilter
+        ? donation.selected.some((category) => category === categoryFilter)
+        : true; // Se não houver filtro de categoria, retorna todas as doações
+    });
   const totalPages = Math.ceil(filteredDonations.length / rowsPerPage);
 
   // popover
@@ -122,14 +115,23 @@ export function DonationsTable({ donations, isLoading }: DonationsTableProps) {
                   fontWeight: categoryFilter === "Alimentos" ? "700" : "normal",
                   ":hover":
                     categoryFilter === "Alimentos"
-                      ? ""
+                      ? undefined
                       : { background: "#fee2e2" },
                   borderColor: "#78716c",
                 }}
               >
                 Alimentos
               </Button>
+
               <Button
+                variant={
+                  categoryFilter === "Brinquedos" ? "contained" : "outlined"
+                }
+                onClick={() =>
+                  setCategoryFilter(
+                    categoryFilter === "Brinquedos" ? null : "Brinquedos"
+                  )
+                }
                 sx={{
                   background:
                     categoryFilter === "Brinquedos" ? "#FF5266" : undefined,
@@ -139,22 +141,21 @@ export function DonationsTable({ donations, isLoading }: DonationsTableProps) {
                     categoryFilter === "Brinquedos" ? "700" : "normal",
                   ":hover":
                     categoryFilter === "Brinquedos"
-                      ? ""
+                      ? undefined
                       : { background: "#fee2e2" },
                   borderColor: "#78716c",
                 }}
-                variant={
-                  categoryFilter === "Brinquedos" ? "contained" : "outlined"
-                }
-                onClick={() =>
-                  setCategoryFilter(
-                    categoryFilter === "Brinquedos" ? null : "Brinquedos"
-                  )
-                }
               >
                 Brinquedos
               </Button>
+
               <Button
+                variant={categoryFilter === "Roupas" ? "contained" : "outlined"}
+                onClick={() =>
+                  setCategoryFilter(
+                    categoryFilter === "Roupas" ? null : "Roupas"
+                  )
+                }
                 sx={{
                   background:
                     categoryFilter === "Roupas" ? "#FF5266" : undefined,
@@ -162,16 +163,10 @@ export function DonationsTable({ donations, isLoading }: DonationsTableProps) {
                   fontWeight: categoryFilter === "Roupas" ? "700" : "normal",
                   ":hover":
                     categoryFilter === "Roupas"
-                      ? ""
+                      ? undefined
                       : { background: "#fee2e2" },
                   borderColor: "#78716c",
                 }}
-                variant={categoryFilter === "Roupas" ? "contained" : "outlined"}
-                onClick={() =>
-                  setCategoryFilter(
-                    categoryFilter === "Roupas" ? null : "Roupas"
-                  )
-                }
               >
                 Roupas
               </Button>
@@ -237,10 +232,14 @@ export function DonationsTable({ donations, isLoading }: DonationsTableProps) {
             .map((donation) => (
               <TableRow key={donation.id}>
                 <TableCell>{donation.id}</TableCell>
-                <TableCell>{donation.donationType}</TableCell>
-                <TableCell>{donation.quantity}</TableCell>
-                <TableCell>{donation.collector}</TableCell>
-                <TableCell>{donation.donor}</TableCell>
+                <TableCell>{donation.selected.join(", ")}</TableCell>
+                <TableCell>
+                  {donation.quantities[donation.selected[0]]}
+                </TableCell>
+                <TableCell>
+                  {donation.formData.firstName} {donation.formData.lastName}
+                </TableCell>
+                <TableCell>{donation.formData.firstName}</TableCell>
                 <TableCell width="150px">{`${donation.date} ${donation.time}`}</TableCell>
                 <TableCell align="left">
                   <button aria-describedby={id} onClick={handleClick}>
@@ -268,7 +267,7 @@ export function DonationsTable({ donations, isLoading }: DonationsTableProps) {
                       <Divider />
                       <button>Editar</button> <br />
                       <Divider />
-                      <button className="text-red-600">Apagar</button>
+                      <button className="text-red-500">Excluir</button>
                     </div>
                   </Popover>
                 </TableCell>

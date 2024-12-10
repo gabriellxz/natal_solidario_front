@@ -9,6 +9,8 @@ import {
   Paper,
   Button,
   ButtonGroup,
+  Popover,
+  Divider,
 } from "@mui/material";
 import { AddCircle } from "../icons/AddCircle";
 import { Search } from "../icons/Search";
@@ -58,6 +60,20 @@ export function DonationsTable({ donations, isLoading }: DonationsTableProps) {
     );
 
   const totalPages = Math.ceil(filteredDonations.length / rowsPerPage);
+
+  // popover
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   const renderPageNumbers = () => {
     const pageNumbers: (number | string)[] = [];
@@ -227,9 +243,34 @@ export function DonationsTable({ donations, isLoading }: DonationsTableProps) {
                 <TableCell>{donation.donor}</TableCell>
                 <TableCell width="150px">{`${donation.date} ${donation.time}`}</TableCell>
                 <TableCell align="left">
-                  <button>
+                  <button aria-describedby={id} onClick={handleClick}>
                     <EllipsisVertical />
                   </button>
+                  <Popover
+                    id={id}
+                    open={open}
+                    anchorEl={anchorEl}
+                    onClose={handleClose}
+                    anchorOrigin={{
+                      vertical: "center",
+                      horizontal: "right",
+                    }}
+                    PaperProps={{
+                      sx: {
+                        boxShadow: "none",
+                        border: "1px solid #a1a1aa",
+                        padding: "8px 10px",
+                      },
+                    }}
+                  >
+                    <div className="space-y-1 text-sm">
+                      <button>Ver detalhes</button> <br />
+                      <Divider />
+                      <button>Editar</button> <br />
+                      <Divider />
+                      <button className="text-red-600">Apagar</button>
+                    </div>
+                  </Popover>
                 </TableCell>
               </TableRow>
             ))}

@@ -7,9 +7,12 @@ import {
   TableRow,
   Paper,
   Button,
+  Popover,
+  Divider,
 } from "@mui/material";
 import { AddCircle } from "../icons/AddCircle";
 import { EllipsisVertical } from "../icons/EllipsisVertical";
+import { useState } from "react";
 
 interface Collection {
   id: number | string;
@@ -23,10 +26,12 @@ interface Collection {
 
 interface RecentCollectionsTableProps {
   collections: Collection[];
+  isLoading: boolean;
 }
 
 export function RecentCollectionsTable({
   collections,
+  isLoading,
 }: RecentCollectionsTableProps) {
   // Ordena as arrecadações pela data mais recente
   const sortedCollections = [...collections].sort((a, b) => {
@@ -37,6 +42,20 @@ export function RecentCollectionsTable({
 
   // Seleciona apenas os 5 itens mais recentes
   const recentCollections = sortedCollections.slice(0, 5);
+
+  // popover
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   return (
     <TableContainer component={Paper} className="p-10 font-poppins">
@@ -76,6 +95,7 @@ export function RecentCollectionsTable({
           </TableRow>
         </TableHead>
         <TableBody>
+          {isLoading && <h2>carregando...</h2>}
           {recentCollections.map((collection) => (
             <TableRow key={collection.id}>
               <TableCell>{collection.id}</TableCell>
@@ -85,7 +105,34 @@ export function RecentCollectionsTable({
               <TableCell>{collection.donor}</TableCell>
               <TableCell width="150px">{`${collection.date} ${collection.time}`}</TableCell>
               <TableCell>
-                <EllipsisVertical />
+                <button aria-describedby={id} onClick={handleClick}>
+                  <EllipsisVertical />
+                </button>
+                <Popover
+                  id={id}
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={handleClose}
+                  anchorOrigin={{
+                    vertical: "center",
+                    horizontal: "right",
+                  }}
+                  PaperProps={{
+                    sx: {
+                      boxShadow: "none",
+                      border: "1px solid #a1a1aa",
+                      padding: "8px 10px",
+                    },
+                  }}
+                >
+                  <div className="space-y-1 text-sm">
+                    <button>Ver detalhes</button> <br />
+                    <Divider />
+                    <button>Editar</button> <br />
+                    <Divider />
+                    <button className="text-red-600">Apagar</button>
+                  </div>
+                </Popover>
               </TableCell>
             </TableRow>
           ))}

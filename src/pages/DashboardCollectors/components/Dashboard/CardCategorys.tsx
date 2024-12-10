@@ -3,12 +3,12 @@ import food_icon from "../../../../assets/food_icon.svg";
 import toys_icon from "../../../../assets/toys_icon.svg";
 import clothing_icon from "../../../../assets/clothing_icon.svg";
 
-export function CardCategorys() {
+export default function CardCategorys() {
   return (
-    <main className="mt-[50px]">
-      <div className="flex justify-around">
+    <main className="mt-[50px] w-full">
+      <div className="flex flex-col items-center gap-5 sm:flex-row sm:justify-around px-5">
         <Card
-          className="w-full max-w-[248px]"
+          className="w-full sm:max-w-[248px]"
           sx={{ display: "flex", alignItems: "center", borderRadius: 5 }}
         >
           <CardContent className="flex gap-5">
@@ -34,7 +34,7 @@ export function CardCategorys() {
           </CardContent>
         </Card>
         <Card
-          className="w-full max-w-[248px]"
+          className="w-full sm:max-w-[248px]"
           sx={{ display: "flex", alignItems: "center", borderRadius: 5 }}
         >
           <CardContent className="flex gap-5">
@@ -60,7 +60,7 @@ export function CardCategorys() {
           </CardContent>
         </Card>
         <Card
-          className="w-full max-w-[248px]"
+          className="w-full sm:max-w-[248px]"
           sx={{ display: "flex", alignItems: "center", borderRadius: 5 }}
         >
           <CardContent className="flex gap-5">

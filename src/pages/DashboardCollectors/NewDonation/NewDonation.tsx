@@ -73,6 +73,13 @@ export function NewDonation() {
   const [selected, setSelected] = useState<string[]>([]);
   const [quantities, setQuantities] = useState<{ [key: string]: number }>({});
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [description, setDescription] = useState<string>("");
+
+  const data = {
+    selected,
+    quantities,
+    description,
+  };
 
   const handleCheckboxChange = (id: string) => {
     setSelected((prevSelected) => {
@@ -132,7 +139,10 @@ export function NewDonation() {
       });
 
       setErrors({}); // Limpa os erros
-
+      setQuantities({[0]: 0})
+      setSelected([""])
+      localStorage.setItem("donationFormStep1", JSON.stringify(data));
+      console.log(data)
       navigate("/dashboard-collectors/confirm-donation");
     } catch (err) {
       if (err instanceof z.ZodError) {
@@ -202,6 +212,8 @@ export function NewDonation() {
                 <textarea
                   className="resize-none h-20 border border-1 border-zinc-400 w-full p-2 rounded-lg"
                   placeholder="opicional"
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
                 />
               </div>
 

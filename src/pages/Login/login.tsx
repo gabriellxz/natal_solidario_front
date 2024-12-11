@@ -1,4 +1,3 @@
-import React from "react";
 import "tailwindcss/tailwind.css";
 import logoNatal from "../../assets/login_images/logo_natal_vermelha.svg";
 import papaiNoel from "../../assets/login_images/papai_noel.svg";

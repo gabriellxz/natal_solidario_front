@@ -42,6 +42,17 @@ export default function NavSide(
         }
     ];
 
+    function isMobileWidth() {
+        return window.innerWidth < 640
+    }
+
+    function handleNavBar(label:string, close: boolean) {
+        setTitle(label);
+        if(isMobileWidth()) {
+            setOpenNavSide(close);
+        }
+    }
+
     return (
         <>
             {
@@ -58,9 +69,14 @@ export default function NavSide(
                                         const match = useMatch(link.path);
 
                                         return (
-                                            <Link onClick={() => setTitle(link.label)} to={link.path} key={link.path} className={`
-                                            flex gap-2 mb-[25px] cursor-pointer px-3 py-3  ${match && "bg-whiteChristmas-100 rounded-xl w-full shadow-md"}
-                                        `}>
+                                            <Link
+                                                onClick={() => handleNavBar(link.label, !openNavSide)}
+                                                to={link.path} key={link.path}
+                                                className={`
+                                                    flex gap-2 mb-[25px] cursor-pointer px-3 py-3  
+                                                    ${match && "bg-whiteChristmas-100 rounded-xl w-full shadow-md"}
+                                                `}
+                                            >
                                                 <img src={link.img} alt="icon" />
                                                 {link.label}
                                             </Link>

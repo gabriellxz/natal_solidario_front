@@ -15,7 +15,6 @@ function App() {
         alt="Logo Natal Solidário"
         className="absolute top-5 left-10 w-20 h-auto"
       />
-      
       <div className="absolute top-0 left-0 w-full h-full">
         {/* estrelas no lado esquerdo */}
         <div className="absolute top-0 left-0 w-1/2 h-full">
@@ -54,55 +53,53 @@ function App() {
           />
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center relative z-10 h-full w-full">
-  <div className="flex items-center space-x-60 mt-24 ml-28"> 
-    {/* papai Noel e login */}
-    <img
-      src={papaiNoel}
-      alt="Papai Noel"
-      className="w-48 h-56 mb-15 mt-8"
-    />
-    <div className="bg-white p-5 rounded-lg shadow-lg w-64 h-100">
-      <h2 className="text-lg mb-4 font-bold">Fazer Login</h2>
-      <form>
-        <div className="mb-3">
-          <label
-            className="block text-gray-700 text-xs mb-1 "
-            htmlFor="username"
-          >
-            Usuário
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="username"
-            type="text"
-          />
+      <div className="flex flex-col items-center justify-center relative z-10 h-screen w-full">
+        <div className="sm:flex items-center justify-between w-3/5 block">
+          {/* papai Noel e login */}
+          <img src={papaiNoel} alt="Papai Noel" className="h-3/4" />
+          <div className="bg-white p-5 rounded-lg shadow-lg w-80 ">
+            <h2 className="text-lg mb-4 font-bold">Fazer Login</h2>
+            <form className="space-y-10">
+              <div className="mb-3">
+                <label
+                  className="block text-gray-700 text-xs mb-1 "
+                  htmlFor="username"
+                >
+                  Usuário
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:text-xs"
+                  id="username"
+                  type="text"
+                  placeholder="Digite nome de usuario"
+                />
+              </div>
+              <div className="mb-4">
+                <label
+                  className="block text-gray-700 text-xs mb-1"
+                  htmlFor="password"
+                >
+                  Senha
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline placeholder:text-xs"
+                  id="password"
+                  type="password"
+                  placeholder="Digite sua senha"
+                />
+              </div>
+              <div>
+                <button
+                  className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full"
+                  type="button"
+                >
+                  Entrar
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div className="mb-4">
-          <label
-            className="block text-gray-700 text-xs mb-1"
-            htmlFor="password"
-          >
-            Senha
-          </label>
-          <input
-            className="shadow appearance-none border rounded w-full py-1 px-2 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-            id="password"
-            type="password"
-          />
-        </div>
-        <div>
-          <button
-            className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded w-full"
-            type="button"
-          >
-            Entrar
-          </button>
-        </div>
-      </form>
-    </div>
-  </div>
-</div>
+      </div>
 
       {/* rodapé com árvores e montanhas */}
       <div className="absolute bottom-0 left-0 w-full">

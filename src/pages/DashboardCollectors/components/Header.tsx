@@ -15,9 +15,6 @@ export default function Header(
     openNavSide
   }: PropsTitle
 ) {
-
-
-
   return (
     <header className="flex items-center justify-between bg-whiteChristmas-100 w-full font-inter px-[50px] py-[30px]">
       <div className="flex items-center gap-5">
@@ -30,7 +27,7 @@ export default function Header(
             Kayo Guilherme
           </span>
           <span className="text-[18px] font-semibold text-darkChristmas-100">
-            Administrador
+            Arrecadador
           </span>
         </div>
         <img src={icon_profile} alt="icon_profile" />
